@@ -1,0 +1,20 @@
+.main-head{
+    background: #183153;
+
+  
+    color:white;
+
+    
+}
+
+.mid{
+    padding-top: 50pt;
+    padding-left: 45pt;
+}
+.but-add-cust{
+    padding-left: 850pt;
+}
+
+.btn:hover{
+    background-color: black;
+}
