@@ -12,8 +12,8 @@ export class HomeComponent implements OnInit {
 
   ngOnInit(): void {
   }
-  change() {
-    this.router.navigate(['/add-customer']);
-  }
+  // change() {
+  //   this.router.navigate(['add-customer']);
+  // }
 
 }

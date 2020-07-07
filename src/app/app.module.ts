@@ -6,8 +6,9 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
 import { AddCustomerComponent } from './add-customer/add-customer.component';
-import { FormsModule } from '@angular/forms';
+import { FormsModule,ReactiveFormsModule } from '@angular/forms';
 import { combineLatest } from 'rxjs';
+import { CustomersService } from './customers.service';
 
 @NgModule({
   declarations: [
@@ -17,8 +18,10 @@ import { combineLatest } from 'rxjs';
     
   ],
   imports: [
+    
     BrowserModule,
     AppRoutingModule,
+    ReactiveFormsModule,
     FormsModule,
     RouterModule.forRoot([
      
@@ -34,7 +37,9 @@ import { combineLatest } from 'rxjs';
      
     ])
   ],
-  providers: [],
+  providers: [
+    CustomersService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
