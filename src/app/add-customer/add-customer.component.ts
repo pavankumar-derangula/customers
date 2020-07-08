@@ -21,31 +21,35 @@ export class AddCustomerComponent implements OnInit {
               private http:HttpClient,
               private router:Router) {
 
+                this.id=this.route.snapshot.paramMap.get('id');
 
-              this.id=this.route.snapshot.paramMap.get('id');
-
-              if(this.id){
-                this.customerService.get(this.id)
-                .valueChanges()
-                .pipe(take(1)).subscribe((p)=>{this.customer=p;
-                  this.form.patchValue({
-                    firstName:this.customer.firstName,
-                    lastName:this.customer.lastName,
-                    gender:this.customer.gender,
-                    city:this.customer.city,
-                    state:this.customer.state,
-                    email:this.customer.email,
-                    address:this.customer.address
-                    
-                  })
-                });
-               
-               
-              }
+                if(this.id){
+                  this.customerService.get(this.id)
+                  .valueChanges()
+                  .pipe(take(1)).subscribe((p)=>{this.customer=p;
+                    this.form.patchValue({
+                      firstName:this.customer.firstName,
+                      lastName:this.customer.lastName,
+                      gender:this.customer.gender,
+                      city:this.customer.city,
+                      state:this.customer.state,
+                      email:this.customer.email,
+                      address:this.customer.address
+                      
+                    })
+                  });
+                 
+                 
+                }
+        
+              
    }
 
   ngOnInit(): void {
-  }
+    
+     
+    }
+  
 
 
   form=new FormGroup({
