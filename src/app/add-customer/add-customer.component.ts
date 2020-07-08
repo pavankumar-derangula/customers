@@ -1,3 +1,4 @@
+import { Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 
 import{ FormGroup,FormControl, Validators } from '@angular/forms';
@@ -10,7 +11,8 @@ import { CustomersService } from '../customers.service';
 })
 export class AddCustomerComponent implements OnInit {
 
-  constructor(private customersService: CustomersService) {
+  constructor(private customerService: CustomersService,
+              private router:Router) {
 
    }
 
@@ -61,12 +63,9 @@ export class AddCustomerComponent implements OnInit {
 
   onSubmit() {
     
-   // console.log(this.form.value);
-    this.customersService.create(form.value);
-    
+    console.log(this.form.value);
+    this.customerService.create(this.form.value);
+    this.router.navigate(['']);
   }
 
-  // save(customer){
-  //   console.log(customer);
-  // }
 }

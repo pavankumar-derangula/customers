@@ -1,3 +1,4 @@
+import { CustomersService } from './../customers.service';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
@@ -7,13 +8,17 @@ import { Router } from '@angular/router';
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent implements OnInit {
-
-  constructor(private router:Router) { }
+  allCustomers;
+  constructor(private router:Router,
+              private customerService:CustomersService) { 
+    this.customerService.getAllCustomers().subscribe(x=>
+      {
+        console.log(x);
+          this.allCustomers=x;
+      })
+  }
 
   ngOnInit(): void {
   }
-  // change() {
-  //   this.router.navigate(['add-customer']);
-  // }
-
+ 
 }

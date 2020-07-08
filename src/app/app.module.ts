@@ -7,8 +7,14 @@ import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
 import { AddCustomerComponent } from './add-customer/add-customer.component';
 import { FormsModule,ReactiveFormsModule } from '@angular/forms';
-import { combineLatest } from 'rxjs';
 import { CustomersService } from './customers.service';
+import { AngularFireModule } from 'angularfire2';
+import { environment } from '../environments/environment';
+import { CustomFormsModule} from 'ng2-validation';
+
+
+import  { AngularFireDatabaseModule } from 'angularfire2/database';
+import {HttpClientModule} from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -18,9 +24,13 @@ import { CustomersService } from './customers.service';
     
   ],
   imports: [
-    
+    AngularFireModule.initializeApp(environment.firebase),
     BrowserModule,
+    AngularFireDatabaseModule,
     AppRoutingModule,
+    HttpClientModule,
+    
+    CustomFormsModule,
     ReactiveFormsModule,
     FormsModule,
     RouterModule.forRoot([
