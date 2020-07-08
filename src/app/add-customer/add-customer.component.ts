@@ -15,18 +15,32 @@ import {take} from 'rxjs/operators';
 })
 export class AddCustomerComponent implements OnInit {
  customer;
+ id;
   constructor(private customerService: CustomersService,
               private route:ActivatedRoute,
               private http:HttpClient,
               private router:Router) {
 
 
-              let id=this.route.snapshot.paramMap.get('id');
+              this.id=this.route.snapshot.paramMap.get('id');
 
-              if(id){
-                this.customerService.get(id)
+              if(this.id){
+                this.customerService.get(this.id)
                 .valueChanges()
-                .pipe(take(1)).subscribe((p)=>{this.customer=p});
+                .pipe(take(1)).subscribe((p)=>{this.customer=p;
+                  this.form.patchValue({
+                    firstName:this.customer.firstName,
+                    lastName:this.customer.lastName,
+                    gender:this.customer.gender,
+                    city:this.customer.city,
+                    state:this.customer.state,
+                    email:this.customer.email,
+                    address:this.customer.address
+                    
+                  })
+                });
+               
+               
               }
    }
 
@@ -76,10 +90,17 @@ export class AddCustomerComponent implements OnInit {
   
 
   onSubmit() {
+    if(this.id){
+      this.customerService.update(this.form.value,this.id);
+      this.router.navigate(['']);
+    }
+    else{
+
+     // console.log(this.form.value);
+      this.customerService.create(this.form.value);
+      this.router.navigate(['']);
+    }
     
-    console.log(this.form.value);
-    this.customerService.create(this.form.value);
-    this.router.navigate(['']);
   }
 
 }

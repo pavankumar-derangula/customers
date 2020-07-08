@@ -32,4 +32,8 @@ export class CustomersService {
   return this.db.object('/customers/'+customerId).remove();
 }
 
+update(customer,customerId){
+  return this.db.object('/customers/'+customerId).update(customer);
+}
+
 }

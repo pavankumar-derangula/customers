@@ -35,7 +35,7 @@
             <td>{{c.state}}</td>
             <td>{{c.email}}</td>
             <td>
-                <a [routerLink]="['/add-customer',c.key]"><i class="fas fa-user-edit"></i></a>
+                <a [routerLink]="['/add-customer/',c.key]"><i class="fas fa-user-edit"></i></a>
                 
                 <a style='padding-left : 25px' href="#" (click) ="delete(c.key)"><i class="fas fa-user-times"></i></a>
             </td>
