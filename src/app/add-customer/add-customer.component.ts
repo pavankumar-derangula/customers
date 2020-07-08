@@ -1,8 +1,12 @@
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
+import {HttpClient} from '@angular/common/http';
 
 import{ FormGroup,FormControl, Validators } from '@angular/forms';
 import { CustomersService } from '../customers.service';
+//import 'rxjs/add/operator/take';
+import {take} from 'rxjs/operators';
+
 
 @Component({
   selector: 'add-customer',
@@ -10,10 +14,20 @@ import { CustomersService } from '../customers.service';
   styleUrls: ['./add-customer.component.css']
 })
 export class AddCustomerComponent implements OnInit {
-
+ customer;
   constructor(private customerService: CustomersService,
+              private route:ActivatedRoute,
+              private http:HttpClient,
               private router:Router) {
 
+
+              let id=this.route.snapshot.paramMap.get('id');
+
+              if(id){
+                this.customerService.get(id)
+                .valueChanges()
+                .pipe(take(1)).subscribe((p)=>{this.customer=p});
+              }
    }
 
   ngOnInit(): void {

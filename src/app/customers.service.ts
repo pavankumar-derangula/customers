@@ -19,8 +19,17 @@ export class CustomersService {
   return this.db.list('/customers').push(customer);
  }
  getAllCustomers() {
-   return this.db.list('/customers').valueChanges();
+   return this.db.list('/customers').snapshotChanges();
  }
 
+ get(customerId){
+   
+   return this.db.object('/customers/'+customerId);
+
+ }
+ 
+ delete(customerId) {
+  return this.db.object('/customers/'+customerId).remove();
+}
 
 }

@@ -43,7 +43,12 @@ import {HttpClientModule} from '@angular/common/http';
       {
         path:'add-customer',
         component: AddCustomerComponent
+      },
+      {
+        path:'add-customer/:id',
+        component: AddCustomerComponent
       }
+      
      
     ])
   ],
