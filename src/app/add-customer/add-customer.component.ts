@@ -79,6 +79,7 @@ export class AddCustomerComponent implements OnInit {
     ]),
     email: new FormControl('',[
       Validators.required,
+      Validators.email
       
     ])
    

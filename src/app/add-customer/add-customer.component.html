@@ -107,8 +107,9 @@
         <div *ngIf="email.errors.required">
             E-MAIL is required.
         </div>
+        <div *ngIf="email.errors.email">E-MAIL must be a valid email address</div>
     </div>
-    <button type='submit' class='btn btn-primary' [disabled]="!form.valid">Save</button>
+    <button type='submit' class='btn btn-primary' [disabled]="!form.valid">Save/Update</button>
     
     <a class='btn btn-primary' routerLink=''>Cancel</a>
 </form>

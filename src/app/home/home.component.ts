@@ -1,6 +1,7 @@
 import { CustomersService } from './../customers.service';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Router } from '@angular/router';
+import { Subscription } from 'rxjs';
 
 
 @Component({
@@ -8,21 +9,34 @@ import { Router } from '@angular/router';
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css']
 })
-export class HomeComponent implements OnInit {
+export class HomeComponent implements OnInit,OnDestroy {
   allCustomers;
-  
+  filteredCustomers:any[];
+  subscription:Subscription;
   constructor(private router:Router,
               private customerService:CustomersService) { 
               
-    this.customerService.getAllCustomers()
+    this.subscription=this.customerService.getAllCustomers()
     .subscribe(x=>
       {
-        this.allCustomers=x.map<any>(y=>y.payload.val());
+       this.filteredCustomers = this.allCustomers
+       =x.map<any>(y=>y.payload.val());
 
-        x.forEach((cur,ind)=>{
-          this.allCustomers[ind].key=cur.key;
-        });
+      //   x.forEach((cur,ind)=>{
+      //     this.allCustomers[ind].key=cur.key;
+      //   });
       })
+  }
+
+  ngOnDestroy(){
+    this.subscription.unsubscribe();
+  }
+
+  filter(query:string){
+    //console.log(query);
+    this.filteredCustomers=(query)?
+    this.allCustomers.filter(p=>p.firstName.toLowerCase().includes(query.toLowerCase())):
+    this.allCustomers;
   }
    
   delete(key:string){

@@ -1,9 +1,14 @@
 
 
 <div class='mid'>
-    <label >filter:</label>
+    <label ><b>filter:</b> </label>
     <!-- <i class="fas fa-edit"></i> -->
-     <input class="filter" type='text'>
+     <input type='text'
+            
+            #query
+            (keyup)="filter(query.value)" placeholder="firstName.."
+
+     >
      <div class='but-add-cust'>
         
         <a class='btn btn-primary' routerLink='add-customer'>ADD New Customer</a>
@@ -21,13 +26,12 @@
             <th>Address</th>
             <th>City</th>
             <th>State</th>
-           
             <th>Email</th>
             <th>Options</th>
           </tr>
         </thead>
     <tbody>
-        <tr *ngFor="let c of allCustomers">
+        <tr *ngFor="let c of filteredCustomers">
             <td>{{c.firstName}}</td>
             <td>{{c.lastName}}</td>
             <td>{{c.address}}</td>
