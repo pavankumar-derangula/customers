@@ -6,6 +6,7 @@ import{ FormGroup,FormControl, Validators } from '@angular/forms';
 import { CustomersService } from '../customers.service';
 //import 'rxjs/add/operator/take';
 import {take} from 'rxjs/operators';
+import { UsernameValidator } from './username.validator';
 
 
 @Component({
@@ -55,12 +56,15 @@ export class AddCustomerComponent implements OnInit {
   form=new FormGroup({
     firstName: new FormControl('',[
         Validators.required,
-        Validators.minLength(3)
+        Validators.minLength(3),
+        UsernameValidator.cannotContainSpace
+        
         
       ]),
     lastName: new FormControl('',[
       Validators.required,
-      Validators.minLength(3)
+      Validators.minLength(3),
+      UsernameValidator.cannotContainSpace
     ]),
     address: new FormControl('',[
       Validators.required,
@@ -80,6 +84,7 @@ export class AddCustomerComponent implements OnInit {
     email: new FormControl('',[
       Validators.required,
       Validators.email
+      
       
     ])
    

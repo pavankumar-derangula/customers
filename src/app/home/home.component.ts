@@ -22,9 +22,9 @@ export class HomeComponent implements OnInit,OnDestroy {
        this.filteredCustomers = this.allCustomers
        =x.map<any>(y=>y.payload.val());
 
-      //   x.forEach((cur,ind)=>{
-      //     this.allCustomers[ind].key=cur.key;
-      //   });
+        x.forEach((cur,ind)=>{
+          this.allCustomers[ind].key=cur.key;
+        });
       })
   }
 
