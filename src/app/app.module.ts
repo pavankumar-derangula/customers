@@ -9,9 +9,11 @@ import { AddCustomerComponent } from './add-customer/add-customer.component';
 import { FormsModule,ReactiveFormsModule } from '@angular/forms';
 import { CustomersService } from './customers.service';
 import { AngularFireModule } from 'angularfire2';
-import { environment } from '../environments/environment';
+import { environment } from './../environments/environment';
 import { CustomFormsModule} from 'ng2-validation';
+import {AngularFireStorage } from "@angular/fire/storage";
 
+// import {AngularFireAuthModule } from 'angularfire2/auth'
 
 import  { AngularFireDatabaseModule } from 'angularfire2/database';
 import {HttpClientModule} from '@angular/common/http';
@@ -24,7 +26,7 @@ import {HttpClientModule} from '@angular/common/http';
     
   ],
   imports: [
-    AngularFireModule.initializeApp(environment.firebase),
+   
     BrowserModule,
     AngularFireDatabaseModule,
     AppRoutingModule,
@@ -33,6 +35,7 @@ import {HttpClientModule} from '@angular/common/http';
     CustomFormsModule,
     ReactiveFormsModule,
     FormsModule,
+    AngularFireModule.initializeApp(environment.firebase),
     RouterModule.forRoot([
      
      
@@ -53,7 +56,8 @@ import {HttpClientModule} from '@angular/common/http';
     ])
   ],
   providers: [
-    CustomersService
+    CustomersService,
+    AngularFireStorage
   ],
   bootstrap: [AppComponent]
 })

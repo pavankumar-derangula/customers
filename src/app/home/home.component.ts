@@ -1,3 +1,4 @@
+
 import { CustomersService } from './../customers.service';
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Router } from '@angular/router';
@@ -11,6 +12,8 @@ import { Subscription } from 'rxjs';
 })
 export class HomeComponent implements OnInit,OnDestroy {
   allCustomers;
+  firstName : string = "";
+  
   filteredCustomers:any[];
   subscription:Subscription;
   constructor(private router:Router,
@@ -25,7 +28,14 @@ export class HomeComponent implements OnInit,OnDestroy {
         x.forEach((cur,ind)=>{
           this.allCustomers[ind].key=cur.key;
         });
-      })
+     
+      this.firstName=localStorage.getItem("filteredvalue");
+  if(this.firstName != null)
+  {
+    this.filter(this.firstName);
+  }
+  });
+  this.firstName = sessionStorage.getItem("filteredvalue");
   }
 
   ngOnDestroy(){
@@ -33,9 +43,8 @@ export class HomeComponent implements OnInit,OnDestroy {
   }
 
   filter(query:string){
-    //console.log(query);
-    this.filteredCustomers=(query)?
-    this.allCustomers.filter(p=>p.firstName.toLowerCase().includes(query.toLowerCase())):
+    console.log(query);
+    this.filteredCustomers= query ?this.allCustomers.filter(p=>p.firstName.toLowerCase().includes(query.toLowerCase())):
     this.allCustomers;
   }
    
@@ -44,8 +53,10 @@ export class HomeComponent implements OnInit,OnDestroy {
     this.customerService.delete(key);
     
   }
-
+ save() {
+  sessionStorage.setItem("filteredvalue",this.firstName);
+ }
   ngOnInit(): void {
+  
   }
- 
 }

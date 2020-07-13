@@ -1,4 +1,4 @@
-import { AngularFireDatabase } from 'angularfire2/database';
+import { AngularFireDatabase, AngularFireList } from 'angularfire2/database';
 
 
 import { Injectable } from '@angular/core';
@@ -10,9 +10,18 @@ import { Injectable } from '@angular/core';
 })
 export class CustomersService {
 
+  imageDetailList:AngularFireList<any>;
  constructor(private db: AngularFireDatabase) { 
 
- }
+}
+
+getImageDetailsList(){
+  this.imageDetailList=this.db.list('imageDetails');
+}  
+
+insertImageDetails(imageDetails){
+  this.imageDetailList.push(imageDetails);
+}
 
   create(customer:any){
   // console.log(customer);
